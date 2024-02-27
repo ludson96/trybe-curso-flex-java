@@ -12,34 +12,49 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class BrandService {
-  private BrandRepository brandRepository;
+
+  private final BrandRepository brandRepository;
 
   @Autowired
   public BrandService(BrandRepository brandRepository) {
     this.brandRepository = brandRepository;
   }
 
-  // create
+  /**
+   * Inseri uma nova brand no banco de dados.
+   *
+   * @param brand corpo da brand a ser inserida no banco de dados.
+   * @return a brand inserida.
+   */
   public Brand insertBrand(Brand brand) {
     return brandRepository.save(brand);
   }
 
-  // read
+  /**
+   * Retorna a brand a partir do id.
+   *
+   * @param id da brand desejada.
+   * @return optional da brand desejada.
+   */
   public Optional<Brand> getBrandById(Long id) {
     return brandRepository.findById(id);
   }
 
-  // read all
+  /**
+   * Retorna todas as brands do banco de dados.
+   *
+   * @return list de todas as brands no banco de dados.
+   */
   public List<Brand> getAllBrand() {
     return brandRepository.findAll();
   }
 
   /**
-   * Atualiza a brand no Banco de dados.
+   * Atualiza a brand no Banco de dados a partir do id.
    *
-   * @param id id da brand a ser atualizada.
-   * @param brand corpo a ser alterado.
-   * @return retorna a brand alterada.
+   * @param id    da brand a ser atualizada.
+   * @param brand informações atualizadas da brand.
+   * @return optional da brand alterada.
    */
   public Optional<Brand> updateBrand(Long id, Brand brand) {
     return brandRepository.findById(id)
@@ -50,10 +65,10 @@ public class BrandService {
   }
 
   /**
-   * Deleta a brand a partir do id.
+   * Deleta uma brand do banco de dados a partir do id.
    *
-   * @param id id da brand a ser deletada.
-   * @return retorna a brand que foi deletada.
+   * @param id da brand a ser deletada.
+   * @return optional da brand deletada.
    */
   public Optional<Brand> deleteBrand(Long id) {
     Optional<Brand> optionalBrand = brandRepository.findById(id);
